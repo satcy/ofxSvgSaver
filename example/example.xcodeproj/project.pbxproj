@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		DE57B18C1A89D8A100437770 /* src_colors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE57B1831A89D8A100437770 /* src_colors.cpp */; };
+		DE57B18D1A89D8A100437770 /* svgtiny.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE57B1841A89D8A100437770 /* svgtiny.cpp */; };
+		DE57B18E1A89D8A100437770 /* svgtiny_gradient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE57B1861A89D8A100437770 /* svgtiny_gradient.cpp */; };
+		DE57B18F1A89D8A100437770 /* svgtiny_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE57B1881A89D8A100437770 /* svgtiny_list.cpp */; };
+		DE57B1901A89D8A100437770 /* ofxSvg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE57B18A1A89D8A100437770 /* ofxSvg.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -60,6 +65,14 @@
 /* Begin PBXFileReference section */
 		8D7BD8A2AFA25008C66F5A9C /* simple_svg.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = simple_svg.hpp; path = ../../../addons/ofxSvgSaver/libs/simple_svg/src/simple_svg.hpp; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		DE57B1831A89D8A100437770 /* src_colors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = src_colors.cpp; sourceTree = "<group>"; };
+		DE57B1841A89D8A100437770 /* svgtiny.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = svgtiny.cpp; sourceTree = "<group>"; };
+		DE57B1851A89D8A100437770 /* svgtiny.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = svgtiny.h; sourceTree = "<group>"; };
+		DE57B1861A89D8A100437770 /* svgtiny_gradient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = svgtiny_gradient.cpp; sourceTree = "<group>"; };
+		DE57B1871A89D8A100437770 /* svgtiny_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = svgtiny_internal.h; sourceTree = "<group>"; };
+		DE57B1881A89D8A100437770 /* svgtiny_list.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = svgtiny_list.cpp; sourceTree = "<group>"; };
+		DE57B18A1A89D8A100437770 /* ofxSvg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSvg.cpp; sourceTree = "<group>"; };
+		DE57B18B1A89D8A100437770 /* ofxSvg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSvg.h; sourceTree = "<group>"; };
 		DE85399F1A84E4C100D208AF /* ofxSvgSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxSvgSaver.h; path = ../src/ofxSvgSaver.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -154,6 +167,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				DE57B17F1A89D8A100437770 /* ofxSvg */,
 				2EED53EEEEC442A0BDBE2B46 /* ofxSvgSaver */,
 			);
 			name = addons;
@@ -186,6 +200,54 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
+			sourceTree = "<group>";
+		};
+		DE57B17F1A89D8A100437770 /* ofxSvg */ = {
+			isa = PBXGroup;
+			children = (
+				DE57B1801A89D8A100437770 /* libs */,
+				DE57B1891A89D8A100437770 /* src */,
+			);
+			name = ofxSvg;
+			path = ../../ofxSvg;
+			sourceTree = "<group>";
+		};
+		DE57B1801A89D8A100437770 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				DE57B1811A89D8A100437770 /* svgTiny */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		DE57B1811A89D8A100437770 /* svgTiny */ = {
+			isa = PBXGroup;
+			children = (
+				DE57B1821A89D8A100437770 /* src */,
+			);
+			path = svgTiny;
+			sourceTree = "<group>";
+		};
+		DE57B1821A89D8A100437770 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				DE57B1831A89D8A100437770 /* src_colors.cpp */,
+				DE57B1841A89D8A100437770 /* svgtiny.cpp */,
+				DE57B1851A89D8A100437770 /* svgtiny.h */,
+				DE57B1861A89D8A100437770 /* svgtiny_gradient.cpp */,
+				DE57B1871A89D8A100437770 /* svgtiny_internal.h */,
+				DE57B1881A89D8A100437770 /* svgtiny_list.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		DE57B1891A89D8A100437770 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				DE57B18A1A89D8A100437770 /* ofxSvg.cpp */,
+				DE57B18B1A89D8A100437770 /* ofxSvg.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		E4328144138ABC890047C5CB /* Products */ = {
@@ -323,6 +385,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				DE57B18C1A89D8A100437770 /* src_colors.cpp in Sources */,
+				DE57B18D1A89D8A100437770 /* svgtiny.cpp in Sources */,
+				DE57B18E1A89D8A100437770 /* svgtiny_gradient.cpp in Sources */,
+				DE57B18F1A89D8A100437770 /* svgtiny_list.cpp in Sources */,
+				DE57B1901A89D8A100437770 /* ofxSvg.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

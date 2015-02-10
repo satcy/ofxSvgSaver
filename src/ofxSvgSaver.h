@@ -37,16 +37,21 @@ public:
     
     void addPaths(vector<ofPath> & paths);
     
-    void addPolylines(vector<ofPolyline> const & polys,
+    void addOfPolylines(vector<ofPolyline> const & polys,
                       bool isFilled = true, ofColor const & col = ofColor(0),
                       float stroke_width = -1, ofColor const & stroke_col = ofColor(0));
     
-    void addPolyline(ofPolyline const & poly,
+    void addOfPolyline(ofPolyline const & poly,
                      bool isFilled = true, ofColor const & col = ofColor(0),
                      float stroke_width = -1, ofColor const & stroke_col = ofColor(0));
     
-    void addFilledPoly(vector<ofPoint> const & points, ofColor const & col);
-    void addStrokedPoly(vector<ofPoint> const & points, int stroke_width = 1, ofColor const & col = ofColor(0));
+    
+    void addPolyline(vector<ofPoint> const & points,
+                     bool isFilled = true, ofColor const & col = ofColor(0),
+                     float stroke_width = -1, ofColor const & stroke_col = ofColor(0));
+    void addPolygon(vector<ofPoint> const & points,
+                    bool isFilled = true, ofColor const & col = ofColor(0),
+                    float stroke_width = -1, ofColor const & stroke_col = ofColor(0));
     
     void addCircle(ofPoint const & center, double diameter,
                    bool isFilled = true, ofColor const & col = ofColor(0),
@@ -57,7 +62,7 @@ public:
     void addElipse(ofPoint const & point, double width, double height,
                    bool isFilled = true, ofColor const & col = ofColor(0),
                    float stroke_width = -1, ofColor const & stroke_col = ofColor(0));
-    void addLine(ofPoint const & start, ofPoint const & end, float stroke_width, ofColor const & stroke_col);
+    //void addLine(ofPoint const & start, ofPoint const & end, float stroke_width, ofColor const & stroke_col);
     
     
 };
@@ -77,42 +82,48 @@ bool ofxSvgSaver::save(){
 void ofxSvgSaver::addPaths(vector<ofPath> & paths){
     for ( int i=0; i<paths.size(); i++ ) {
         ofPath path = paths[i];
-        addPolylines(path.getOutline(), path.isFilled(), path.getFillColor(), path.getStrokeWidth(), path.getStrokeWidth());
+        addOfPolylines(path.getOutline(), path.isFilled(), path.getFillColor(), path.getStrokeWidth(), path.getStrokeWidth());
     }
 }
 
-void ofxSvgSaver::addPolylines(vector<ofPolyline> const & polys,
+void ofxSvgSaver::addOfPolylines(vector<ofPolyline> const & polys,
                                bool isFilled, ofColor const & col,
                                float stroke_width, ofColor const & stroke_col){
     for ( int i=0; i<polys.size(); i++ ) {
-        addPolyline(polys[i], isFilled, col, stroke_width, stroke_col);
+        addOfPolyline(polys[i], isFilled, col, stroke_width, stroke_col);
     }
 }
 
-void ofxSvgSaver::addPolyline(ofPolyline const & poly,
+void ofxSvgSaver::addOfPolyline(ofPolyline const & poly,
                               bool isFilled, ofColor const & col,
                               float stroke_width, ofColor const & stroke_col){
-    if ( isFilled ) {
-        addFilledPoly(poly.getVertices(), col);
+    if ( poly.isClosed() ) {
+        addPolygon(poly.getVertices(), isFilled, col, stroke_width, stroke_col);
     } else {
-        addStrokedPoly(poly.getVertices(), stroke_width, col);
+        addPolyline(poly.getVertices(), isFilled, col, stroke_width, stroke_col);
     }
 }
 
-void ofxSvgSaver::addFilledPoly(vector<ofPoint> const & points, ofColor const & col){
+void ofxSvgSaver::addPolyline(vector<ofPoint> const & points,
+                 bool isFilled, ofColor const & col,
+                 float stroke_width, ofColor const & stroke_col){
     if ( !doc ) return;
     
-    svg::Polygon poly(svg::Fill(svg::Color(col.r, col.g, col.b)));
+    svg::Polyline poly(svg::Fill( isFilled ? svg::Color(col.r, col.g, col.b) : svg::Color::Transparent ),
+                      svg::Stroke(stroke_width, stroke_width > 0 ? svg::Color(stroke_col.r, stroke_col.g, stroke_col.b) : svg::Color::Transparent ));
     for ( int i=0; i<points.size(); i++ ) {
         poly << svg::Point(points[i].x, points[i].y);
     }
     *doc << poly;
 }
 
-void ofxSvgSaver::addStrokedPoly(vector<ofPoint> const & points, int stroke_width, ofColor const & col){
+void ofxSvgSaver::addPolygon(vector<ofPoint> const & points,
+                bool isFilled, ofColor const & col,
+                float stroke_width, ofColor const & stroke_col){
     if ( !doc ) return;
     
-    svg::Polygon poly(svg::Stroke(stroke_width, svg::Color(col.r, col.g, col.b)));
+    svg::Polygon poly(svg::Fill( isFilled ? svg::Color(col.r, col.g, col.b) : svg::Color::Transparent ),
+                      svg::Stroke(stroke_width, stroke_width > 0 ? svg::Color(stroke_col.r, stroke_col.g, stroke_col.b) : svg::Color::Transparent ));
     for ( int i=0; i<points.size(); i++ ) {
         poly << svg::Point(points[i].x, points[i].y);
     }
@@ -153,7 +164,7 @@ void ofxSvgSaver::addElipse(ofPoint const & point, double width, double height,
     *doc << elipse;
     
 }
-
+/*
 void ofxSvgSaver::addLine(ofPoint const & start, ofPoint const & end, float stroke_width, ofColor const & stroke_col){
     if ( !doc ) return;
     
@@ -161,4 +172,4 @@ void ofxSvgSaver::addLine(ofPoint const & start, ofPoint const & end, float stro
                    svg::Stroke(stroke_width, svg::Color(stroke_col.r, stroke_col.g, stroke_col.b)));
     
     *doc << line;
-}
+}*/
