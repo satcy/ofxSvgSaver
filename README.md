@@ -1,2 +1,2 @@
 # ofxSvgSaver
-simple-svg http://code.google.com/p/simple-svg/ for openFrameworks
+simple-svg https://github.com/AniaWujek/Simple_SVG for openFrameworks
